@@ -84,13 +84,15 @@ The production files will be generated in the `dist/` directory and are ready fo
 
 ## 📄 License
 
-MIT License
+[MIT License](LICENSE)
 
 ---
 
 ## ✨ Preview Screenshot
 
-> (You can place a homepage screenshot here)
+> ![Preview](preview/Screenshot-1745062971167.png "Preview")
+
+> ![Preview](preview/IMG_20250419_194640.png "Preview")
 
 ---
 

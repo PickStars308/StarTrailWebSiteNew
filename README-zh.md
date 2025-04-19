@@ -83,14 +83,15 @@ npm run build
 
 ## 📄 License
 
-MIT License
+[MIT License](LICENSE)
 
 ---
 
 ## ✨ 项目展示截图
 
->（你可以放一张首页截图）
+> ![Preview](preview/Screenshot-1745062971167.png "Preview")
 
+> ![Preview](preview/IMG_20250419_194640.png "Preview")
 ---
 
 ## 🙌 感谢支持

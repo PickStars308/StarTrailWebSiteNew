@@ -1,0 +1,210 @@
+main.Main {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 70vh;
+  z-index: 10;
+}
+
+.Social {
+  display: flex;
+  gap: 20px;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+
+  .item {
+    width: 100px;
+    height: 100px;
+    color: #ffffff;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+
+      i {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+    }
+
+    // 底部伪元素横线
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: var(--hover-color);
+      transition: height 0.3s ease;
+      z-index: 1;
+    }
+
+    // hover 时扩展高度成为背景
+    &:hover::after {
+      height: 100%;
+    }
+
+    // hover 文字颜色改为白色
+    &:hover .content {
+      color: #fff;
+    }
+  }
+}
+
+
+section.Head {
+  position: absolute;
+  margin-left: 12.5rem;
+
+  .HeadTitle {
+    color: #ffffff;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .HeadSubTitle {
+    display: flex;
+    align-items: center;
+
+    .Text {
+      letter-spacing: 0.1em;
+      font-size: 1rem;
+      margin-left: 20px;
+      margin-right: 20px;
+      color: #ffffff;
+    }
+  }
+}
+
+section.About {
+  margin-top: 22.5rem; /* 360.0px */
+  margin-left: 9vw;
+  margin-right: 9vw;
+}
+
+section.Skills {
+  margin-top: 2.5rem; /* 360.0px */
+  margin-left: 9vw;
+  margin-right: 9vw;
+}
+
+section.Projects {
+  margin-top: 2.5rem; /* 360.0px */
+  margin-left: 9vw;
+  margin-right: 9vw;
+}
+
+.svg {
+  width: 30%;
+  height: 30%;
+
+}
+
+
+
+/* 更小屏幕（例如手机）适配 */
+@media (max-width: 480px) {
+  main.Main {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 60vh;
+    z-index: 10;
+  }
+
+  .Social {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+
+    .item {
+      width: calc(33.333% - 10px); // 减去间距
+      height: 80px;
+
+      .content {
+        font-size: 12px;
+
+        i {
+          font-size: 20px;
+          margin-bottom: 4px;
+        }
+      }
+
+      &::after {
+        height: 3px;
+      }
+    }
+  }
+
+  section.Head {
+    text-align: center;
+    margin-left: 0rem;
+
+    .HeadTitle {
+      color: #ffffff;
+      font-size: 5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .HeadSubTitle {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .Text {
+        letter-spacing: 0.1em;
+        font-size: 1rem;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 10px;
+        color: #ffffff;
+      }
+    }
+  }
+
+  section.About {
+    margin-top: 22.5rem; /* 360.0px */
+    margin-left: 0vw;
+    margin-right: 0vw;
+
+    .AboutText {
+      font-size: 1rem; /* 20.0px */
+    }
+  }
+
+  section.Skills {
+    margin-top: 3rem;
+    margin-left: 0vw;
+    margin-right: 0vw;
+  }
+
+  section.Projects {
+    margin-top: 0rem;
+    margin-left: 0vw;
+    margin-right: 0vw;
+
+    .ProjectsImg {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import "https://chinese-fonts-cdn.deno.dev/packages/dymh/dist/DouyinSansBold/result.css";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family:'Douyin Sans';
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}

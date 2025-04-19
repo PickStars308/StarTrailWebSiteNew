@@ -1,0 +1,26 @@
+[
+  {
+    "icon": "icon-QQ",
+    "link": "https://qm.qq.com/q/xoyO0uIja8",
+    "label": "QQ",
+    "color": "rgb(102, 204, 255)"
+  },
+  {
+    "icon": "icon-WeiBo",
+    "link": "https://weibo.com/u/7983363542",
+    "label": "WeiBo",
+    "color": "rgb(255, 0, 0)"
+  },
+  {
+    "icon": "icon-Github",
+    "link": "https://github.com/PickStars308",
+    "label": "Github",
+    "color": "rgb(121, 121, 121)"
+  },
+  {
+    "icon": "icon-BiliBili",
+    "link": "https://space.bilibili.com/1736196701",
+    "label": "BiliBili",
+    "color": "rgb(251, 114, 153)"
+  }
+]

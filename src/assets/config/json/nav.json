@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "主页",
+    "Path": "/"
+  },
+  {
+    "Name": "下载",
+    "Path": "/Download"
+  },
+  {
+    "Name": "Contact",
+    "Path": "/contact"
+  }
+]

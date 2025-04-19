@@ -1,0 +1,41 @@
+/* 动画定义 */
+@keyframes FadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes FadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes FadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.FIL {
+    animation: FadeInLeft 0.8s ease-out forwards;
+}
+
+.FIU {
+    animation: FadeInUp 0.8s ease-out forwards;
+}

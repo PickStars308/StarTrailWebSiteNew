@@ -1,0 +1,78 @@
+
+section.VersionHead {
+  position: absolute;
+  margin-left: 12.5rem;
+
+  .HeadTitle {
+    color: #ffffff;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .HeadSubTitle {
+    display: flex;
+    align-items: center;
+
+    .Text {
+      letter-spacing: 0.1em;
+      font-size: 1rem;
+      margin-left: 20px;
+      margin-right: 20px;
+      color: #ffffff;
+    }
+  }
+}
+
+section.VersionDes {
+  margin-top: 22.5rem; /* 360.0px */
+  margin-left: 8.8vw;
+  margin-right: 8.8vw;
+}
+
+section.Version {
+  margin-top: 2.5rem; /* 360.0px */
+  margin-left: 8.8vw;
+  margin-right: 8.8vw;
+}
+
+@media (max-width: 480px) {
+  section.Version {
+    margin-left: 0vw;
+    margin-right: 0vw;
+  }
+  section.VersionDes {
+    margin-left: 0vw;
+    margin-right: 0vw;
+  }
+
+  section.VersionHead {
+    width: 100%;
+    display: flex;
+    margin-left: 0rem;
+    flex-direction: column;
+    align-items: center;
+
+    .HeadTitle {
+      color: #ffffff;
+      font-size: 5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .HeadSubTitle {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .Text {
+        letter-spacing: 0.1em;
+        font-size: 1rem;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 10px;
+        color: #ffffff;
+      }
+    }
+  }
+}

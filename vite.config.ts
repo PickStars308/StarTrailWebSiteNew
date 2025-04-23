@@ -1,7 +1,7 @@
-import {URL, fileURLToPath} from 'node:url'
-import { defineConfig, loadEnv } from "vite";
+import {fileURLToPath, URL} from 'node:url'
+import {defineConfig, loadEnv} from "vite";
 import Components from 'unplugin-vue-components/vite'
-import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers'
+import {AntDesignVueResolver, ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import {visualizer} from "rollup-plugin-visualizer";
@@ -9,8 +9,7 @@ import viteCompression from 'vite-plugin-compression'
 
 
 import AutoImport from 'unplugin-auto-import/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
-import { VitePWA } from "vite-plugin-pwa";
+import {VitePWA} from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default ({mode}: { mode: string }) =>
@@ -41,6 +40,9 @@ export default ({mode}: { mode: string }) =>
             }),
             VitePWA({
                 registerType: "autoUpdate",
+                devOptions: {
+                    enabled: true
+                },
                 workbox: {
                     skipWaiting: true,
                     clientsClaim: true,
@@ -70,13 +72,13 @@ export default ({mode}: { mode: string }) =>
                     theme_color: "#424242",
                     background_color: "#424242",
                     icons: [
-                        {src: "/images/icon/48.png", sizes: "48x48", type: "image/png"},
-                        {src: "/images/icon/72.png", sizes: "72x72", type: "image/png"},
-                        {src: "/images/icon/96.png", sizes: "96x96", type: "image/png"},
-                        {src: "/images/icon/128.png", sizes: "128x128", type: "image/png"},
-                        {src: "/images/icon/144.png", sizes: "144x144", type: "image/png"},
-                        {src: "/images/icon/192.png", sizes: "192x192", type: "image/png"},
-                        {src: "/images/icon/512.png", sizes: "512x512", type: "image/png"},
+                        {src: "/assets/images/icon/48.png", sizes: "48x48", type: "image/png"},
+                        {src: "/assets/images/icon/72.png", sizes: "72x72", type: "image/png"},
+                        {src: "/assets/images/icon/96.png", sizes: "96x96", type: "image/png"},
+                        {src: "/assets/images/icon/128.png", sizes: "128x128", type: "image/png"},
+                        {src: "/assets/images/icon/144.png", sizes: "144x144", type: "image/png"},
+                        {src: "/assets/images/icon/192.png", sizes: "192x192", type: "image/png"},
+                        {src: "/assets/images/icon/512.png", sizes: "512x512", type: "image/png"},
                     ],
                 },
             })

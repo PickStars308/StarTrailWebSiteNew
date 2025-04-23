@@ -7,8 +7,11 @@ import SvgIcon from './components/SvgIcon.vue'
 import './assets/iconfont/iconfont.js';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import http from "./utils/Axios";
 
 const app = createApp(App)
+app.config.globalProperties.$axios = http;
+
 app.use(router)
 app.use(ElementPlus)
 app.component('SvgIcon', SvgIcon);

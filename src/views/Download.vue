@@ -1,27 +1,15 @@
 <script setup lang="ts">
 // import {reactive} from "vue";
-import {ref} from 'vue'
-import {onMounted} from 'vue'
-import {computed} from 'vue'
+import {computed, onMounted, ref} from 'vue'
+import axios from 'axios'
+import {ElMessage, ElNotification} from 'element-plus'
+import http from "../utils/Axios.ts";
 
 const avatarUrl = `http://q.qlogo.cn/headimg_dl?dst_uin=${import.meta.env.VITE_SITE_AVATAR}&spec=640&img_type=jpg`;
 const siteName = import.meta.env.VITE_SITE_NAME;
 
-import VersionData from '@/assets/config/json/version.json'; // 使用相对路径
+const Version = ref();
 
-const Version = ref(VersionData.default || VersionData);
-
-import axios from 'axios'
-import {ElMessage} from 'element-plus'
-
-// 热更新处理
-if (import.meta.hot) {
-  import.meta.hot.accept('@/assets/config/json/version.json', (newModule) => {
-    if (newModule) {
-      Version.value = newModule.default || newModule; // 更新数据
-    }
-  });
-}
 
 interface VersionItem {
   VersionType: string
@@ -75,8 +63,27 @@ const Quotes = [
   '创新驱动发展，科技引领未来'
 ]
 
-onMounted(() => {
+onMounted(async () => {
   RandomQuote.value = Quotes[Math.floor(Math.random() * Quotes.length)]
+
+  // 加载 版本信息
+  try {
+    const response = await http.get("assets/config/json/version.json");
+    if (Array.isArray(response.data)) {
+      Version.value = response.data;
+    } else {
+      ElNotification({
+        title: "提示",
+        message: "获取的数据格式不正确",
+        type: "warning",
+      });
+    }
+  } catch (error) {
+    ElNotification({
+      title: "提示",
+      message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
+    })
+  }
 })
 
 

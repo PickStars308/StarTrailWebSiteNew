@@ -3,10 +3,24 @@ import {onMounted, ref} from 'vue'
 import StarTrails from './components/StarTrails.vue'
 
 import WOW from 'wow.js/dist/wow.js'
-import NavData from '@/assets/config/json/nav.json'; // ✅ 应放到顶部
-import {checkDays, helloInit} from "./utils/Home";
 
-onMounted(() => {
+import {checkDays, helloInit} from "./utils/Home";
+import {ElNotification} from 'element-plus'
+import http from "./utils/Axios";
+// 示例：输出带图标的日志
+import {ConsoleLogger} from './utils/ConsoleLogger';
+
+// 定义导航项的接口
+interface NavItem {
+  Name: string;
+  Path: string;
+  Use: boolean;
+}
+
+// 初始化 navItems 并指定类型
+const navItems = ref<NavItem[]>([]);
+
+onMounted(async () => {
 
   checkDays();
 
@@ -33,27 +47,27 @@ onMounted(() => {
     }
   })
 
+  try {
+    const response = await http.get("assets/config/json/nav.json");
+    if (Array.isArray(response.data)) {
+      navItems.value = response.data;
+    } else {
+      ElNotification({
+        title: "提示",
+        message: "获取的数据格式不正确",
+        type: "warning",
+      });
+    }
+  } catch (error) {
+    ElNotification({
+      title: "提示",
+      message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
+      type: "error",
+    });
+  }
 
 })
 
-interface NavItem {
-  Name: string;
-  Path: string;
-}
-
-const navItems = ref<NavItem[]>(NavData.default || NavData);
-
-// 热更新处理
-if (import.meta.hot) {
-  import.meta.hot.accept('@/assets/config/json/nav.json', (newModule) => {
-    if (newModule) {
-      navItems.value = newModule.default || newModule; // 更新数据
-    }
-  });
-}
-
-// 示例：输出带图标的日志
-import {ConsoleLogger} from './utils/ConsoleLogger'; // ✅ 推荐写法
 
 const icon = `
 
@@ -84,7 +98,8 @@ if (ConsoleLogger) {
 <template>
   <!-- 导航 -->
   <nav class="wow FIU absolute fixed bottom-4 left-4 z-20">
-    <div v-for="(item, index) in navItems" :key="index" class="my-6 text-3 text-white wv">
+
+    <div v-for="(item, index) in navItems.filter(i => i.Use)" :key="index" class="my-6 text-5 text-white wv">
       <router-link
           :to="item.Path"
           class="text-white hover:text-gray-300 transition-colors"
@@ -116,7 +131,7 @@ if (ConsoleLogger) {
 <style lang="scss" scoped>
 
 // 引入 css
-@use "@/assets/styles/Animation" as *;
+@use "./assets/styles/Animation" as *;
 
 #Background.fixed {
   position: fixed;

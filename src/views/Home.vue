@@ -1,49 +1,13 @@
 <script setup lang="ts">
 // import {reactive} from "vue";
-import {ref} from 'vue'
-import {onMounted} from 'vue'
-import {computed} from 'vue'
+import {computed, onMounted, ref} from 'vue'
+import http from "../utils/Axios.ts";
+import {ElNotification} from "element-plus"; // 使用相对路径
 
 const avatarUrl = `http://q.qlogo.cn/headimg_dl?dst_uin=${import.meta.env.VITE_SITE_AVATAR}&spec=640&img_type=jpg`;
 const siteName = import.meta.env.VITE_SITE_NAME;
 
-import SocialData from '@/assets/config/json/social.json'; // 使用相对路径
 
-const Social = ref(SocialData.default || SocialData);
-
-// 热更新处理
-if (import.meta.hot) {
-  import.meta.hot.accept('@/assets/config/json/skills.json', (newModule) => {
-    if (newModule) {
-      Skills.value = newModule.default || newModule; // 更新数据
-    }
-  });
-}
-
-import SkillsData from '@/assets/config/json/skills.json'; // 使用相对路径
-
-const Skills = ref(SkillsData.default || SkillsData);
-
-// 热更新处理
-if (import.meta.hot) {
-  import.meta.hot.accept('@/assets/config/json/skills.json', (newModule) => {
-    if (newModule) {
-      Skills.value = newModule.default || newModule; // 更新数据
-    }
-  });
-}
-import MyProjectsData from '@/assets/config/json/projects.json'; // 使用相对路径
-
-const MyProjects = ref(MyProjectsData.default || MyProjectsData);
-
-// 热更新处理
-if (import.meta.hot) {
-  import.meta.hot.accept('@/assets/config/json/skills.json', (newModule) => {
-    if (newModule) {
-      MyProjects.value = newModule.default || newModule; // 更新数据
-    }
-  });
-}
 
 const SiteICP = computed(() => import.meta.env.VITE_SITE_ICP)
 const SiteCopyRight = computed(() => import.meta.env.VITE_SITE_AUTHOR)
@@ -62,8 +26,74 @@ const Quotes = [
   '创新驱动发展，科技引领未来'
 ]
 
-onMounted(() => {
+
+// 加载数据
+
+const MyProjects = ref();
+const Social = ref();
+const Skills = ref();
+
+onMounted(async () => {
   RandomQuote.value = Quotes[Math.floor(Math.random() * Quotes.length)]
+
+  // 加载项目数据
+  try {
+    const response = await http.get("assets/config/json/projects.json");
+    if (Array.isArray(response.data)) {
+      MyProjects.value = response.data;
+    } else {
+      ElNotification({
+        title: "提示",
+        message: "获取的数据格式不正确",
+        type: "warning",
+      });
+    }
+  } catch (error) {
+    ElNotification({
+      title: "提示",
+      message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
+      type: "error",
+    });
+  }
+
+  // 加载技巧数据
+  try {
+    const response = await http.get("assets/config/json/skills.json");
+    if (Array.isArray(response.data)) {
+      Skills.value = response.data;
+    } else {
+      ElNotification({
+        title: "提示",
+        message: "获取的数据格式不正确",
+        type: "warning",
+      });
+    }
+  } catch (error) {
+    ElNotification({
+      title: "提示",
+      message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
+    })
+  }
+
+  // 加载const Social = ref();
+
+  try {
+    const response = await http.get("assets/config/json/social.json");
+    if (Array.isArray(response.data)) {
+      Social.value = response.data;
+    } else {
+      ElNotification({
+        title: "提示",
+        message: "获取的数据格式不正确",
+        type: "warning",
+      });
+    }
+  } catch (error) {
+    ElNotification({
+      title: "提示",
+      message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
+    })
+  }
 })
 
 </script>

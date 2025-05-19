@@ -8,8 +8,9 @@ const avatarUrl = `http://q.qlogo.cn/headimg_dl?dst_uin=${import.meta.env.VITE_S
 const siteName = import.meta.env.VITE_SITE_NAME;
 
 
-
 const SiteICP = computed(() => import.meta.env.VITE_SITE_ICP)
+const ShowSiteICP = ref(true);
+
 const SiteCopyRight = computed(() => import.meta.env.VITE_SITE_AUTHOR)
 const CurrentYear = new Date().getFullYear()
 
@@ -17,7 +18,7 @@ const RandomQuote = ref('')
 
 const Quotes = [
   '摘星辰，探星河，包罗万象',
-  '因为热爱所以用心',
+  '因为热爱，所以用心',
   '代码改变世界，编程创造未来',
   '求知若饥，虚心若愚',
   '技术无止境，探索不停歇',
@@ -93,6 +94,12 @@ onMounted(async () => {
       title: "提示",
       message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
     })
+  }
+
+  if (SiteICP.value) {
+    ShowSiteICP.value = true;
+  } else {
+    ShowSiteICP.value = false;
   }
 })
 
@@ -257,7 +264,9 @@ onMounted(async () => {
         <i i-ant-design-environment-outlined ml-1/>
       </div>
       <div class="text-white/60 mt-2 f-c-c gap-4">
-        <div v-html="SiteICP"></div>
+        <div v-if="SiteICP" id="ShowSiteICP">
+          {{ SiteICP }}
+        </div>
         <div>© 2022-{{ CurrentYear }} {{ SiteCopyRight }} 版权所有</div>
       </div>
     </footer>

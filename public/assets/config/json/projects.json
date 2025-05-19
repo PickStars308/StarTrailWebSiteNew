@@ -1,5 +1,10 @@
 [
   {
+    "Name": "StarTrailWebSiteNew",
+    "Description": "✨ A sleek and responsive personal homepage built with Vue 3 + TypeScript + Vite. Perfect for developers to showcase their portfolios.",
+    "Link": "https://github.com/PickStars308/StarTrailWebSiteNew"
+  },
+  {
     "Name": "StarTrailWebSite",
     "Description": "This is a static personal homepage built with Vue 3, TypeScript, and Vite, featuring glowing effects and a dynamic design to showcase personal information and skills. It’s ideal for developers or anyone seeking a modern, stylish personal page.",
     "Link": "https://github.com/PickStars308/StarTrailWebsite"

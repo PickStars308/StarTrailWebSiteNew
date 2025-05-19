@@ -6,10 +6,10 @@
       "NoUseTip": "摘星辰的 \"程序猿\" 还在开发新官网...</h4> <h4>正在抽时间开发呢...</h4>"
     },
     "AppName": "摘星辰",
-    "VersionCode": "1",
-    "Version": "1.0",
-    "UpdateLog": "assets/config/updatelog/release/1.0",
-    "DownloadUrl": "https://d.kstore.dev/download/3819/PickStars/Release/PickStars_1.0_release_sign.apk"
+    "VersionCode": "2",
+    "Version": "2.0",
+    "UpdateLog": "assets/config/updatelog/release/2.0",
+    "DownloadUrl": "http://backend.xinstudio.top/ResourceData/PickStars_2.0_sign.apk"
   },
   {
     "VersionType": "Beta",

@@ -99,7 +99,7 @@ if (ConsoleLogger) {
   <!-- 导航 -->
   <nav class="wow FIU absolute fixed bottom-4 left-4 z-20">
 
-    <div v-for="(item, index) in navItems.filter(i => i.Use)" :key="index" class="my-6 text-5 text-white wv">
+    <div v-for="(item, index) in navItems.filter(i => i.Use)" :key="index" class="my-6 text-4 text-white wv">
       <router-link
           :to="item.Path"
           class="text-white hover:text-gray-300 transition-colors"

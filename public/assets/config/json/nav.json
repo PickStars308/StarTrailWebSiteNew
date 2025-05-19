@@ -7,11 +7,11 @@
   {
     "Name": "下载",
     "Path": "/Download",
-    "Use": false
+    "Use": true
   },
   {
-    "Name": "Contact",
-    "Path": "/contact",
+    "Name": "StarsAPI",
+    "Path": "/StarsAPI",
     "Use": true
   }
 ]

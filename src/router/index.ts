@@ -1,4 +1,4 @@
-import {createRouter, createMemoryHistory} from 'vue-router';
+import {createMemoryHistory, createRouter} from 'vue-router';
 
 const routes = [
     {
@@ -7,9 +7,9 @@ const routes = [
         component: () => import('@/views/Home.vue'),
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () => import('@/views/About.vue'),
+        path: '/StarsAPI',
+        name: 'StarsAPI',
+        component: () => import('@/views/StarsAPI.vue'),
     },
     {
         path: '/Download',

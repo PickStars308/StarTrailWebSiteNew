@@ -9,7 +9,7 @@ const siteName = import.meta.env.VITE_SITE_NAME;
 
 
 const SiteICP = computed(() => import.meta.env.VITE_SITE_ICP)
-const ShowSiteICP = ref(true);
+const ShowSiteICP = ref(false);
 
 const SiteCopyRight = computed(() => import.meta.env.VITE_SITE_AUTHOR)
 const CurrentYear = new Date().getFullYear()

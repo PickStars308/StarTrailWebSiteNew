@@ -2,11 +2,15 @@
 // import {reactive} from "vue";
 
 import {computed, onMounted, ref} from "vue";
+import {ElNotification} from "element-plus";
+import http from "../utils/Axios.ts";
 
 const avatarUrl = `http://q.qlogo.cn/headimg_dl?dst_uin=${import.meta.env.VITE_SITE_AVATAR}&spec=640&img_type=jpg`;
 const siteName = import.meta.env.VITE_SITE_NAME;
 
 const SiteICP = computed(() => import.meta.env.VITE_SITE_ICP)
+const ShowSiteICP = ref(false);
+
 const SiteCopyRight = computed(() => import.meta.env.VITE_SITE_AUTHOR)
 const CurrentYear = new Date().getFullYear()
 
@@ -23,9 +27,47 @@ const Quotes = [
   '创新驱动发展，科技引领未来'
 ]
 
+interface APIItem {
+  title: string;
+  status: string;
+  billing: string;
+  date: string;
+  description: string;
+  link: string;
+}
+
+const API = ref<APIItem[]>([])
+
 onMounted(async () => {
   RandomQuote.value = Quotes[Math.floor(Math.random() * Quotes.length)]
+
+  try {
+
+    const response = await http.get('assets/config/json/api/index.json')
+    if (Array.isArray(response.data)) {
+      API.value = response.data
+    } else {
+      ElNotification({
+        title: '提示',
+        message: '获取的数据格式不正确',
+        type: 'warning'
+      })
+    }
+  } catch (error) {
+    ElNotification({
+      title: '提示',
+      dangerouslyUseHTMLString: true,
+      message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`
+    })
+  }
+
+  if (SiteICP.value) {
+    ShowSiteICP.value = true;
+  } else {
+    ShowSiteICP.value = false;
+  }
 })
+
 </script>
 
 <template>
@@ -87,6 +129,25 @@ onMounted(async () => {
 
     <section class="wow FIL Version">
       <Title prefix="Choice" suffix="API"/>
+      <div class="card-grid">
+        <div v-for="(item, index) in API" :key="index" class="api-card">
+          <div class="api-card__header">
+            <div class="api-card__title">
+              {{ item.title }}
+              <div class="api-card__badge api-card__badge--status">{{ item.status }}</div>
+              <div class="api-card__badge api-card__badge--paid">{{ item.billing }}</div>
+            </div>
+            <div class="api-card__subtitle">
+              <svg-icon class="icon" iconName="icon-Time"/>
+              发布时间：{{ item.date }}
+            </div>
+          </div>
+          <div class="api-card__content">{{ item.description }}</div>
+          <div class="api-card__footer">
+            <a :href="item.link" class="api-card__link" target="_blank">查看文档</a>
+          </div>
+        </div>
+      </div>
 
     </section>
 
@@ -98,7 +159,9 @@ onMounted(async () => {
         <i i-ant-design-environment-outlined ml-1/>
       </div>
       <div class="text-white/60 mt-2 f-c-c gap-4">
-        <div v-html="SiteICP"></div>
+        <div v-if="SiteICP" id="ShowSiteICP">
+          {{ SiteICP }}
+        </div>
         <div>© 2022-{{ CurrentYear }} {{ SiteCopyRight }} 版权所有</div>
       </div>
     </footer>
@@ -110,5 +173,101 @@ onMounted(async () => {
 @use "@/assets/styles/Download" as *;
 
 @use "@/assets/styles/Animation" as *;
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 3rem;
+  margin-top: 1rem;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 0.5rem;
+}
+
+.api-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(20px);
+  backdrop-opacity: 0.6;
+  transition: all 0.3s ease;
+  color: #fff;
+
+  &:hover {
+    background-color: #2d2d2d;
+    transform: translateY(-6px);
+    backdrop-opacity: 1;
+  }
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    color: #fff;
+
+    &--status {
+      background-color: #4caf50; // 绿色
+    }
+
+    &--paid {
+      background-color: #2196f3; // 蓝色
+    }
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    margin-top: 0.25rem;
+
+
+    i {
+      font-size: 0.9rem;
+      margin-right: 0.25rem;
+    }
+  }
+
+  &__content {
+    font-size: 0.95rem;
+    margin: 1rem 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__link {
+    color: #90caf9;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 
 </style>

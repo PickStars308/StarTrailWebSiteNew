@@ -47,6 +47,8 @@ const showUpdateLogAndDownload = async (item: VersionItem) => {
 }
 
 const SiteICP = computed(() => import.meta.env.VITE_SITE_ICP)
+const ShowSiteICP = ref(false);
+
 const SiteCopyRight = computed(() => import.meta.env.VITE_SITE_AUTHOR)
 const CurrentYear = new Date().getFullYear()
 
@@ -83,6 +85,12 @@ onMounted(async () => {
       title: "提示",
       message: `数据加载失败 Σヽ(ﾟД ﾟ; )ﾉ <br/>${error}`,
     })
+  }
+
+  if (SiteICP.value) {
+    ShowSiteICP.value = true;
+  } else {
+    ShowSiteICP.value = false;
   }
 })
 
@@ -209,7 +217,9 @@ onMounted(async () => {
         <i i-ant-design-environment-outlined ml-1/>
       </div>
       <div class="text-white/60 mt-2 f-c-c gap-4">
-        <div v-html="SiteICP"></div>
+        <div v-if="SiteICP" id="ShowSiteICP">
+          {{ SiteICP }}
+        </div>
         <div>© 2022-{{ CurrentYear }} {{ SiteCopyRight }} 版权所有</div>
       </div>
     </footer>

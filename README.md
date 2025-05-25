@@ -78,7 +78,7 @@ The production files will be generated in the `dist/` directory and are ready fo
 
 - Recommended editors: **WebStorm** or **VS Code**
 - Use `<Icon iconName="icon-name" />` to easily call icons
-- Import JSON config from `@/assets/config/json/*.json`
+- Import JSON config from `@/public/config/json/*.json`
 
 ---
 

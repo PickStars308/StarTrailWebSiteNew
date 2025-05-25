@@ -77,7 +77,7 @@ npm run build
 
 - 推荐使用 **WebStorm** / **VS Code** 编辑器开发
 - 图标使用 `<Icon iconName="icon-name" />` 封装组件调用
-- JSON 数据路径使用 `@/assets/config/json/*.json` 引入
+- JSON 数据路径使用 `@/public/config/json/*.json` 引入
 
 ---
 

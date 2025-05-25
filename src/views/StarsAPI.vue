@@ -131,20 +131,20 @@ onMounted(async () => {
       <Title prefix="Choice" suffix="API"/>
       <div class="card-grid">
         <div v-for="(item, index) in API" :key="index" class="api-card">
-          <div class="api-card__header">
-            <div class="api-card__title">
+          <div class="api-card_header">
+            <div class="api-card_title">
               {{ item.title }}
-              <div class="api-card__badge api-card__badge--status">{{ item.status }}</div>
-              <div class="api-card__badge api-card__badge--paid">{{ item.billing }}</div>
+              <div class="api-card_badge api-card_badge--status">{{ item.status }}</div>
+              <div class="api-card_badge api-card_badge--paid">{{ item.billing }}</div>
             </div>
-            <div class="api-card__subtitle">
+            <div class="api-card_subtitle">
               <svg-icon class="icon" iconName="icon-Time"/>
               发布时间：{{ item.date }}
             </div>
           </div>
-          <div class="api-card__content">{{ item.description }}</div>
-          <div class="api-card__footer">
-            <a :href="item.link" class="api-card__link" target="_blank">查看文档</a>
+          <div class="api-card_content">{{ item.description }}</div>
+          <div class="api-card_footer">
+            <a :href="item.link" class="api-card_link" target="_blank">查看文档</a>
           </div>
         </div>
       </div>
@@ -206,11 +206,11 @@ onMounted(async () => {
     backdrop-opacity: 1;
   }
 
-  &__header {
+  &_header {
     margin-bottom: 1rem;
   }
 
-  &__title {
+  &_title {
     font-size: 1.2rem;
     font-weight: bold;
     display: flex;
@@ -219,7 +219,7 @@ onMounted(async () => {
     flex-wrap: wrap;
   }
 
-  &__badge {
+  &_badge {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     border-radius: 999px;
@@ -234,7 +234,7 @@ onMounted(async () => {
     }
   }
 
-  &__subtitle {
+  &_subtitle {
     font-size: 1rem;
     color: #ccc;
     display: flex;
@@ -248,17 +248,17 @@ onMounted(async () => {
     }
   }
 
-  &__content {
+  &_content {
     font-size: 0.95rem;
     margin: 1rem 0;
   }
 
-  &__footer {
+  &_footer {
     display: flex;
     justify-content: flex-end;
   }
 
-  &__link {
+  &_link {
     color: #90caf9;
     font-weight: 500;
     text-decoration: none;
@@ -269,5 +269,10 @@ onMounted(async () => {
   }
 }
 
+@media (max-width: 480px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 </style>
